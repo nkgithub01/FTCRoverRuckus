@@ -124,6 +124,6 @@ Note: Some names start with "Team" and others start with "team".  This is intent
 
 ## 8577 Robocats 
 
-1) use the testing branch for all untested code
+1) Use the testing branch for all untested code
 
-2)once you have tested the code and think it works properly, merge the testing branch with the master branch
+2) Once you have tested the code and think it works properly, merge the testing branch with the master branch
