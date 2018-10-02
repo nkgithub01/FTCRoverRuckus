@@ -12,7 +12,9 @@ public class test extends OpMode{
 
     public void init() {}
 
-    public void start() { runtime.reset(); }
+    public void start() {
+        runtime.reset();
+    }
 
     public void loop() { telemetry.addData("Runtime: ", getRuntime()); }
 
