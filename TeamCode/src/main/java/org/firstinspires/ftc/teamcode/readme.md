@@ -119,3 +119,11 @@ Note: Some names start with "Team" and others start with "team".  This is intent
 5)  Add:    include ':Team0417' to the "/settings.gradle" file.
     
 6)  Open up Android Studios and clean out any old files by using the menu to "Build/Clean Project""
+
+----------------------------------------------------------------------------------------------------
+
+## 8577 Robocats 
+
+1) Use the testing branch for all untested code
+
+2) Once you have tested the code and think it works properly, merge the testing branch with the master branch
