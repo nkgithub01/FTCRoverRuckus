@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Hardware;
@@ -27,10 +28,36 @@ public class test extends OpMode{
         DcMotor rightBack = hardwareMap.get(DcMotor.class, "rightBack");;
         DcMotor rightMiddle = hardwareMap.get(DcMotor.class, "rightMiddle");;
         DcMotor rightFront = hardwareMap.get(DcMotor.class, "rightFront");;
+
+        leftBack.setDirection(DcMotor.Direction.FORWARD);
+        leftMiddle.setDirection(DcMotor.Direction.FORWARD);
+        leftFront.setDirection(DcMotor.Direction.FORWARD);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
+        rightMiddle.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+
+        telemetry.addData("Status", "Initialized");
+
     }
 
     public void start() { runtime.reset(); }
 
-    public void loop() { telemetry.addData("Runtime: ", getRuntime()); }
+    public void loop() {
+        // drive the robot
+
+        leftBack.setPower(gamepad1.left_stick_y);
+        leftMiddle.setPower(gamepad1.left_stick_y);
+        leftFront.setPower(gamepad1.left_stick_y);
+        rightBack.setPower(gamepad1.right_stick_y);
+        rightMiddle.setPower(gamepad1.right_stick_y);
+        rightFront.setPower(gamepad1.right_stick_y);
+
+
+
+
+
+
+        telemetry.addData("Runtime: ", getRuntime());
+    }
 
 }
