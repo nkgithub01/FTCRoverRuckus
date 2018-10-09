@@ -2,10 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Hardware;
 
 public class test extends OpMode{
 
@@ -40,12 +37,10 @@ public class test extends OpMode{
 
     }
 
-    public void start() {
-        runtime.reset();
-    }
+    public void start() { runtime.reset(); }
 
     public void loop() {
-        //Drive the robot
+        // drive the robot
 
         leftBack.setPower(gamepad1.left_stick_y);
         leftMiddle.setPower(gamepad1.left_stick_y);
