@@ -1,5 +1,5 @@
 /*
- * Code for user controlled part of the conpetition
+ * Code for user controlled part of the competition
  */
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp (name = "testDrive")
 public class test extends OpMode{
 
-    /* objects*/
+    //Objects
     /**********************************/
     ElapsedTime runtime = new ElapsedTime();
 
@@ -23,7 +23,7 @@ public class test extends OpMode{
     DcMotor rightMiddle = null;
     DcMotor rightFront = null;
 
-    //intake
+    //Intake
     Servo intake = null;
     boolean inForward = false;
     boolean inBackward = false;
@@ -39,7 +39,7 @@ public class test extends OpMode{
         rightMiddle = hardwareMap.get(DcMotor.class, "rightMiddle");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
 
-        //Intialize the servos
+        //Initialize the servos
         intake = hardwareMap.get(Servo.class, "intake" );
 
 
@@ -69,7 +69,7 @@ public class test extends OpMode{
     }
 
     public void loop() {
-        // drive the robot
+        //Drive the robot
         leftBack.setPower(gamepad1.left_stick_y);
         leftMiddle.setPower(gamepad1.left_stick_y);
         leftFront.setPower(gamepad1.left_stick_y);
