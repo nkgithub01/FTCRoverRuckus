@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+/*
+ * Code for user controlled part of the competition
+ */
+>>>>>>> 5e5018257056a614ae7c7e4159d7d9450dbc3a43
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
