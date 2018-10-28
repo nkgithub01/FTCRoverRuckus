@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
-    Created by ERIC IS AUTISTIC ON 10/23/18
+    Created by me ON 10/23/18
  */
 @TeleOp(name="4wheelD", group="OpMode")
 public class FourWheelDrive extends OpMode{
