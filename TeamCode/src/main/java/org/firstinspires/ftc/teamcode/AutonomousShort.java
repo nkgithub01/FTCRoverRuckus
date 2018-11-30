@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class AutonomousShort extends LinearOpMode{
 
     //Objects
-    /**********************************/
+    /*********************************************************************************/
     ElapsedTime runtime = new ElapsedTime();
 
     //Motors
@@ -28,8 +28,12 @@ public class AutonomousShort extends LinearOpMode{
     boolean inBackward = false;
     boolean ab2Pressed = false;
 
+    //Constants
     final double ticksPerInch = 1;
     final double ticksPerDegree = 1;
+
+    //running
+    /*********************************************************************************/
 
     //Initialize the variables
     public void runOpMode() {
