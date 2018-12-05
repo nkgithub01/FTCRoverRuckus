@@ -94,10 +94,10 @@ public class AutonomousShort extends LinearOpMode{
     }
 
     /**
-     * Rotates right by a number of degrees
+     * Rotates right by a number of degrees, negative degrees will rotate left
      * @param degrees the number of degrees to rotate right
      */
-    public void rotateRight(double degrees) {
+    public void rotate(double degrees) {
         int deg = (int) (degrees * ticksPerDegree);
         leftBack.setTargetPosition(leftBack.getTargetPosition() + deg);
         leftFront.setTargetPosition(leftBack.getTargetPosition() + deg);
