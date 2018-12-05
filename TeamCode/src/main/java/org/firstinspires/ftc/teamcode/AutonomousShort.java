@@ -138,5 +138,4 @@ public class AutonomousShort extends LinearOpMode{
         rightFront.setPower(power);
     }
     
-
 }
