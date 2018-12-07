@@ -38,7 +38,7 @@ public class test extends OpMode{
         rightLin = hardwareMap.get(DcMotor.class, "rightLin");
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
 
-        //Intialize the servos
+        //Initialize the servos
         intake = hardwareMap.get(Servo.class, "intake" );
 
 
