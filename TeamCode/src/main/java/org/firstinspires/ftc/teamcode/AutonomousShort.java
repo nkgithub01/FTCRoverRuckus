@@ -29,7 +29,7 @@ public class AutonomousShort extends LinearOpMode{
     boolean ab2Pressed = false;
 
     //Constants
-    final double ticksPerInch = 1;
+    final double ticksPerCm = 1;
     final double ticksPerDegree = 1;
 
     //running
@@ -107,11 +107,11 @@ public class AutonomousShort extends LinearOpMode{
     }
 
     /**
-     * Go forward a number of inches
-     * @param inches the distance to travel
+     * Go forward a number of centimeters
+     * @param cm the distance to travel
      */
-    public void run(double inches) {
-        setAllMotors((int) (inches * ticksPerInch));
+    public void run(double cm) {
+        setAllMotors((int) (cm * ticksPerCm));
         setPowerAllMotors(100);
     }
 
