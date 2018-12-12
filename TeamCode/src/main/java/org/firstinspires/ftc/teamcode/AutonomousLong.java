@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="AutonomousShort", group="OpMode")
-public class AutonomousShort extends LinearOpMode{
+public class AutonomousLong extends LinearOpMode{
 
     //Objects
     /*********************************************************************************/
@@ -159,5 +159,5 @@ public class AutonomousShort extends LinearOpMode{
         leftFront.setPower(power);
         rightFront.setPower(power);
     }
-    
+
 }
