@@ -101,17 +101,19 @@ public class AutonomousLong extends LinearOpMode{
 
         //Knock the gold off
         int goldIndex = -1;
+        /*include color sensor code and when to turn, when finished turn towards 90 degrees east of lander*/
 
         //Drive to depot
-        if (goldIndex == 1) run(45);
-        else run(60);
+        if (goldIndex == 0) run(120);
+        else if (goldIndex == 1) run(78);
+        else run(36);
+        rotate(-45);
+        run(160);
 
         //Place team marker
 
         //Drive to crater
-        if (goldIndex == 0) rotate(60);
-        else if (goldIndex == 1) rotate(45);
-        else rotate(20);
+        rotate(180);
         run(220);
     }
 

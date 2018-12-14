@@ -101,6 +101,7 @@ public class AutonomousShort extends LinearOpMode{
 
         //Knock the gold off
         int goldIndex = -1;
+        /*include color sensor code and when to turn, when finished turn towards depo*/
 
         //Drive to depot
         if (goldIndex == 1) run(45);
