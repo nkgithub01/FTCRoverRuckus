@@ -27,8 +27,8 @@ public class test extends LinearOpMode{
     Servo intake = null;
 
     //Constants
-    final double ticksPerCm = 1;
-    final double ticksPerDegree = 1;
+    double ticksPerCm = 1;
+    double ticksPerDegree = 1;
 
     //running
     /*********************************************************************************/
@@ -87,8 +87,44 @@ public class test extends LinearOpMode{
 
         waitForStart();
 
-        run(100);
-        rotate(90);
+        double lo = 0.0, hi = 100, mid;
+        while (hi - lo > 0.0000001) {
+            mid = (lo + hi) / 2;
+            ticksPerCm = mid;
+            run(100);
+            boolean ishi = false;
+            while (!gamepad1.a || !gamepad1.b) {
+                if (gamepad1.a) {
+                    ishi = true;
+                    break;
+                } else if (gamepad1.b) {
+                    ishi = false;
+                    break;
+                }
+            }
+            if (ishi) hi = mid;
+            else lo = mid;
+        }
+
+        lo = 0.0;
+        hi = 100;
+        while (hi - lo > 0.0000001) {
+            mid = (lo + hi) / 2;
+            ticksPerDegree = mid;
+            rotate(90);
+            boolean ishi = false;
+            while (!gamepad1.a || !gamepad1.b) {
+                if (gamepad1.a) {
+                    ishi = true;
+                    break;
+                } else if (gamepad1.b) {
+                    ishi = false;
+                    break;
+                }
+            }
+            if (ishi) hi = mid;
+            else lo = mid;
+        }
     }
 
     /**
