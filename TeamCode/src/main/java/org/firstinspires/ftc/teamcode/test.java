@@ -88,6 +88,7 @@ public class test extends LinearOpMode{
         waitForStart();
 
         run(100);
+        rotate(90);
     }
 
     /**
