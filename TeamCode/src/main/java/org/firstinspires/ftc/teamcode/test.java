@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="AutonomousShort", group="OpMode")
+@TeleOp(name="test", group="OpMode")
 public class test extends LinearOpMode{
 
     //Objects
