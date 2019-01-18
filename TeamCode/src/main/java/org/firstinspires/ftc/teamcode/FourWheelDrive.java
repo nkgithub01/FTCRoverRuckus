@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /*
     Created by me ON 10/23/18
  */
-@TeleOp(name="4wheelD", group="OpMode")
+@TeleOp(name="FourWheelDrive", group="OpMode")
 public class FourWheelDrive extends OpMode{
 
     /* objects*/
