@@ -2,13 +2,15 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="DriverOp", group="OpMode")
-public class Drive extends OpMode{
+/*
+    Created by me ON 10/23/18
+ */
+@TeleOp(name="DriveWithLinearSlide", group="OpMode")
+public class DriveWithLinearSlide extends OpMode{
 
-    //Objects
+    /* objects*/
     /**********************************/
     ElapsedTime runtime = new ElapsedTime();
 
@@ -21,13 +23,8 @@ public class Drive extends OpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
-    //Intake
-    Servo intake = null;
-    boolean inForward = false;
-    boolean inBackward = false;
-    boolean ab2Pressed = false;
-
     //Initialize the variables
+    @Override
     public void init() {
         //Initialize the DcMotors
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
@@ -37,10 +34,6 @@ public class Drive extends OpMode{
 
         rightLin = hardwareMap.get(DcMotor.class, "rightLin");
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
-
-        //Initialize the servos
-        intake = hardwareMap.get(Servo.class, "intake" );
-
 
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -60,23 +53,16 @@ public class Drive extends OpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
-        //Set the direction of the servo
-        intake.setDirection(Servo.Direction.FORWARD);
-
-        //Initialize servo to be not moving
-        intake.setPosition(0.5);
-
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
-
-        intake.setPosition(0);
-
     }
 
+    @Override
     public void start() {
         runtime.reset();
     }
 
+    @Override
     public void loop() {
         //Drive the robot
         leftBack.setPower(gamepad1.left_stick_y);
@@ -85,52 +71,44 @@ public class Drive extends OpMode{
         rightFront.setPower(gamepad1.right_stick_y);
 
         //Linear slide control
-        if (gamepad1.left_bumper) leftLin.setPower(100);
-        else if (gamepad1.left_trigger > 0) leftLin.setPower(-100);
-        if (gamepad1.right_bumper) rightLin.setPower(100);
-        else if (gamepad1.right_trigger > 0) rightLin.setPower(-100);
-
-        //Toggle code for intake
-        if (gamepad2.a && !ab2Pressed)
-        {
-            if(!inForward)
-            {
-                inForward = true;
-                inBackward = false;
-            }
-            else
-            {
-                inForward = false;
-            }
+        if (gamepad1.left_bumper) {
+            leftLin.setPower(100);
         }
-        else if (gamepad2.b && !ab2Pressed)
-        {
-            if(!inBackward)
-            {
-                inForward = false;
-                inBackward = true;
-            }
-            else
-            {
-                inBackward = false;
-            }
+        if (gamepad1.right_bumper) {
+            rightLin.setPower(100);
         }
-
-        if(!ab2Pressed && (gamepad2.a || gamepad2.b))
-        {
-            ab2Pressed = true;
+        if (gamepad1.left_trigger > 0) {
+            leftLin.setPower(-100);
         }
-        else if (ab2Pressed && !(gamepad2.a || gamepad2.b))
-        {
-            ab2Pressed = false;
+        if (gamepad1.right_trigger > 0) {
+            rightLin.setPower(-100);
         }
-
-        //Sets the turning for the intake servo
-        if (inForward) intake.setPosition(0);
-        else if (inBackward) intake.setPosition(1);
-        else intake.setPosition(0.5);
+        if (!gamepad1.left_bumper && gamepad1.left_trigger <= 0) {
+            leftLin.setPower(0);
+        }
+        if (!gamepad1.right_bumper && gamepad1.right_trigger <= 0) {
+            rightLin.setPower(0);
+        }
+        /*if (gamepad1.left_bumper) {
+            leftLin.setPower(-100);
+            rightLin.setPower(100);
+        }
+        if (gamepad1.right_bumper) {
+            leftLin.setPower(100);
+            rightLin.setPower(-100);
+        }
+        if (!gamepad1.left_bumper && !gamepad1.right_bumper) {
+            leftLin.setPower(0);
+            rightLin.setPower(0);
+        }*/
 
         //Displays the runtime
+        telemetry.addData("Left joystick: ", gamepad1.left_stick_y);
+        telemetry.addData("right joystick: ", gamepad1.right_stick_y);
+        telemetry.addData("left bumper: ", gamepad1.left_bumper);
+        telemetry.addData("right bumper: ", gamepad1.right_bumper);
+        telemetry.addData("left trigger: ", gamepad1.left_trigger);
+        telemetry.addData("right trigger: ", gamepad1.right_trigger);
         telemetry.addData("Runtime: ", getRuntime());
     }
 

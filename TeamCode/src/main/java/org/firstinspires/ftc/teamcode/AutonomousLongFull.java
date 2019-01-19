@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousLong", group="OpMode")
-public class AutonomousLong extends LinearOpMode{
+@Autonomous(name="AutonomousLongFull", group="OpMode")
+public class AutonomousLongFull extends LinearOpMode{
 
     //Objects
     /*********************************************************************************/
