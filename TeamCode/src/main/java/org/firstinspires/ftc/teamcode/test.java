@@ -23,12 +23,9 @@ public class test extends LinearOpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
-    //Intake
-    Servo intake = null;
-
     //Constants
-    double ticksPerCm = 1;
-    double ticksPerDegree = 1;
+    double timePerCm = 1000;
+    double timePerDegree = 1000;
 
     //running
     /*********************************************************************************/
@@ -43,9 +40,6 @@ public class test extends LinearOpMode{
 
         rightLin = hardwareMap.get(DcMotor.class, "rightLin");
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
-
-        //Initialize the servos
-        intake = hardwareMap.get(Servo.class, "intake" );
 
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -65,33 +59,21 @@ public class test extends LinearOpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
-        //Set the directions of the motors
-        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftLin.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightLin.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        //Set the direction of the servo
-        intake.setDirection(Servo.Direction.FORWARD);
-
-        //Initialize servo to be not moving
-        intake.setPosition(0.5);
-
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
-        intake.setPosition(0);
-
         waitForStart();
 
-        double lo = 0.0, hi = 100, mid;
+        runForward(10);
+        runBackward(10);
+        rotateRight(180);
+        rotateLeft(180);
+
+        /*double lo = 0.0, hi = 10, mid;
         while (hi - lo > 0.0000001) {
             mid = (lo + hi) / 2;
             ticksPerCm = mid;
-            run(100);
+            run(10);
             boolean ishi = false;
             while (!gamepad1.a || !gamepad1.b) {
                 if (gamepad1.a) {
@@ -107,7 +89,7 @@ public class test extends LinearOpMode{
         }
 
         lo = 0.0;
-        hi = 100;
+        hi = 10;
         while (hi - lo > 0.0000001) {
             mid = (lo + hi) / 2;
             ticksPerDegree = mid;
@@ -124,40 +106,53 @@ public class test extends LinearOpMode{
             }
             if (ishi) hi = mid;
             else lo = mid;
-        }
+        }*/
     }
 
     /**
      * Rotates right by a number of degrees, negative degrees will rotate left
      * @param degrees the number of degrees to rotate right
      */
-    public void rotate(double degrees) {
-        int deg = (int) (degrees * ticksPerDegree);
-        leftBack.setTargetPosition(leftBack.getTargetPosition() + deg);
-        leftFront.setTargetPosition(leftBack.getTargetPosition() + deg);
-        rightBack.setTargetPosition(leftBack.getTargetPosition() + deg);
-        rightFront.setTargetPosition(leftBack.getTargetPosition() + deg);
-        setPowerAllMotors(100);
+    public void rotateRight(double degrees) {
+        leftBack.setPower(100);
+        leftFront.setPower(100);
+        rightBack.setPower(-100);
+        rightFront.setPower(-100);
+        try {
+            Thread.sleep((int) (timePerDegree * degrees));
+        } catch (Exception e) { }
+        setPowerAllMotors(0);
+    }
+
+    public void rotateLeft(double degrees) {
+        leftBack.setPower(-100);
+        leftFront.setPower(-100);
+        rightBack.setPower(100);
+        rightFront.setPower(100);
+        try {
+            Thread.sleep((int) (timePerDegree * degrees));
+        } catch (Exception e) { }
+        setPowerAllMotors(0);
     }
 
     /**
      * Go forward a number of centimeters
      * @param cm the distance to travel
      */
-    public void run(double cm) {
-        setAllMotors((int) (cm * ticksPerCm));
+    public void runForward(double cm) {
         setPowerAllMotors(100);
+        try {
+            Thread.sleep((int) (timePerCm * cm));
+        } catch (Exception e) { }
+        setPowerAllMotors(0);
     }
 
-    /**
-     * Set how much to go forward on all motors
-     * @param dist the amount of encoder ticks
-     */
-    public void setAllMotors(int dist) {
-        leftBack.setTargetPosition(leftBack.getTargetPosition() + dist);
-        rightBack.setTargetPosition(leftBack.getTargetPosition() - dist);
-        leftFront.setTargetPosition(leftBack.getTargetPosition() + dist);
-        rightFront.setTargetPosition(leftBack.getTargetPosition() - dist);
+    public void runBackward(double cm) {
+        setPowerAllMotors(-100);
+        try {
+            Thread.sleep((int) (timePerCm * cm));
+        } catch (Exception e) { }
+        setPowerAllMotors(0);
     }
 
     /**
