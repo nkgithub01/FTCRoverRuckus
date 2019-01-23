@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -7,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="test", group="OpMode")
+@Autonomous(name="test", group="Autonomous")
 public class test extends LinearOpMode{
 
     //Objects
@@ -68,6 +69,8 @@ public class test extends LinearOpMode{
         runBackward(10);
         rotateRight(180);
         rotateLeft(180);
+
+
 
         /*double lo = 0.0, hi = 10, mid;
         while (hi - lo > 0.0000001) {

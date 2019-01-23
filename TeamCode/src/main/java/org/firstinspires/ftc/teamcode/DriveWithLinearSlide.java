@@ -89,18 +89,6 @@ public class DriveWithLinearSlide extends OpMode{
         if (!gamepad1.right_bumper && gamepad1.right_trigger <= 0) {
             rightLin.setPower(0);
         }
-        /*if (gamepad1.left_bumper) {
-            leftLin.setPower(-100);
-            rightLin.setPower(100);
-        }
-        if (gamepad1.right_bumper) {
-            leftLin.setPower(100);
-            rightLin.setPower(-100);
-        }
-        if (!gamepad1.left_bumper && !gamepad1.right_bumper) {
-            leftLin.setPower(0);
-            rightLin.setPower(0);
-        }*/
 
         //Displays the runtime
         telemetry.addData("Left joystick: ", gamepad1.left_stick_y);
