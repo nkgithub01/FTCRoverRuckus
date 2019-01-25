@@ -27,6 +27,7 @@ public class test extends LinearOpMode{
     //Constants
     double timePerCm = 1000;
     double timePerDegree = 1000;
+    double ticksPerCm = 1;
 
     //running
     /*********************************************************************************/
@@ -65,11 +66,12 @@ public class test extends LinearOpMode{
 
         waitForStart();
 
-        runForward(10);
-        runBackward(10);
-        rotateRight(180);
-        rotateLeft(180);
-
+        extendLinearSlide(1);
+        extendLinearSlide(-1);
+        //runForward(10);
+        //runBackward(10);
+        //rotateRight(180);
+        //rotateLeft(180);
 
 
         /*double lo = 0.0, hi = 10, mid;
@@ -168,6 +170,17 @@ public class test extends LinearOpMode{
         rightBack.setPower(power);
         leftFront.setPower(power);
         rightFront.setPower(power);
+    }
+
+    /**
+     * Extends the linear slide a certain distance
+     * @param cm the distance to extend
+     */
+    public void extendLinearSlide(double cm) {
+        leftLin.setTargetPosition(leftLin.getTargetPosition() + (int) (cm * ticksPerCm));
+        //rightLin.setTargetPosition(rightLin.getTargetPosition() - (int) (cm * ticksPerCm));
+        leftLin.setPower(100);
+        //rightLin.setPower(100);
     }
 
 }
