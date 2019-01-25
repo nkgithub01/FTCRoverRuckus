@@ -90,6 +90,11 @@ public class DriveWithLinearSlide extends OpMode{
             rightLin.setPower(0);
         }
 
+        if (leftLin.getCurrentPosition() > 500 && leftLin.getPower() > 0) leftLin.setPower(0);
+        if (rightLin.getCurrentPosition() > 500 && rightLin.getPower() > 0) rightLin.setPower(0);
+        if (leftLin.getCurrentPosition() <= 0 && leftLin.getPower() < 0) leftLin.setPower(0);
+        if (rightLin.getCurrentPosition() <= 0 && rightLin.getPower() < 0) rightLin.setPower(0);
+
         //Displays the runtime
         telemetry.addData("Left joystick: ", gamepad1.left_stick_y);
         telemetry.addData("right joystick: ", gamepad1.right_stick_y);
@@ -97,6 +102,8 @@ public class DriveWithLinearSlide extends OpMode{
         telemetry.addData("right bumper: ", gamepad1.right_bumper);
         telemetry.addData("left trigger: ", gamepad1.left_trigger);
         telemetry.addData("right trigger: ", gamepad1.right_trigger);
+        telemetry.addData("left linear: ", leftLin.getCurrentPosition());
+        telemetry.addData("right linear: ", rightLin.getCurrentPosition());
         telemetry.addData("Runtime: ", getRuntime());
     }
 

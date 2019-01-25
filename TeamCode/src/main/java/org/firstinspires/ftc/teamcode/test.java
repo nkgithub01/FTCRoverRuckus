@@ -25,9 +25,9 @@ public class test extends LinearOpMode{
     DcMotor leftLin = null;
 
     //Constants
-    double timePerCm = 1000;
-    double timePerDegree = 1000;
-    double ticksPerCm = 1;
+    double timePerCm = 70;
+    double timePerDegree = 7;
+    double ticksPerCm = 20;
 
     //running
     /*********************************************************************************/
@@ -68,10 +68,11 @@ public class test extends LinearOpMode{
 
         extendLinearSlide(1);
         extendLinearSlide(-1);
-        //runForward(10);
-        //runBackward(10);
-        //rotateRight(180);
-        //rotateLeft(180);
+
+        runForward(10);
+        runBackward(10);
+        rotateRight(180);
+        rotateLeft(180);
 
 
         /*double lo = 0.0, hi = 10, mid;
@@ -177,8 +178,8 @@ public class test extends LinearOpMode{
      * @param cm the distance to extend
      */
     public void extendLinearSlide(double cm) {
-        leftLin.setTargetPosition(leftLin.getTargetPosition() + (int) (cm * ticksPerCm));
-        //rightLin.setTargetPosition(rightLin.getTargetPosition() - (int) (cm * ticksPerCm));
+        leftLin.setTargetPosition(leftLin.getCurrentPosition() + (int) (cm * ticksPerCm));
+        //rightLin.setTargetPosition(rightLin.getCurrentPosition() - (int) (cm * ticksPerCm));
         leftLin.setPower(100);
         //rightLin.setPower(100);
     }
