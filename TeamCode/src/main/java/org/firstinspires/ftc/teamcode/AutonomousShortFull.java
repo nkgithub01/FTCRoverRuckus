@@ -24,8 +24,9 @@ public class AutonomousShortFull extends LinearOpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
-    //Intake
+    //Servos
     Servo intake = null;
+    Servo markerDeployment = null;
 
     //Sensors
     ColorSensor color = null;
@@ -50,6 +51,7 @@ public class AutonomousShortFull extends LinearOpMode{
 
         //Initialize the servos
         intake = hardwareMap.get(Servo.class, "intake" );
+        markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
 
         //init sensors
         color = hardwareMap.get(ColorSensor.class, "color");
@@ -82,8 +84,9 @@ public class AutonomousShortFull extends LinearOpMode{
         leftLin.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightLin.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        //Set the direction of the servo
+        //Set the direction of the servos
         intake.setDirection(Servo.Direction.FORWARD);
+        markerDeployment.setDirection(Servo.Direction.FORWARD);
 
         //Initialize servo to be not moving
         intake.setPosition(0.5);
@@ -127,11 +130,13 @@ public class AutonomousShortFull extends LinearOpMode{
         else run(60);
 
         //Place team marker
+        if (goldIndex == 0) rotate(-180);
+        else if (goldIndex == 1) rotate(-225);
+        else rotate(-135);
+        markerDeployment.setPosition(0.5);
 
         //Drive to crater
-        if (goldIndex == 0) rotate(60);
-        else if (goldIndex == 1) rotate(45);
-        else rotate(20);
+        rotate(-45);
         run(220);
     }
 

@@ -24,6 +24,9 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
+    //Servos
+    Servo markerDeployment = null;
+
     //Constants
     final double ticksPerCm = 1;
     final double ticksPerDegree = 1;
@@ -41,6 +44,9 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
 
         rightLin = hardwareMap.get(DcMotor.class, "rightLin");
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
+
+        //Initialize the Servos
+        markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
 
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -60,7 +66,10 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
-        //Set the directions of the motors
+        //Set the direction of the servos
+        markerDeployment.setDirection(Servo.Direction.FORWARD);
+
+        //Set the modes of the motors
         leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -84,7 +93,7 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
 
         //Place team marker
         rotate(180);
-        /*Release marker*/
+        markerDeployment.setPosition(0.5);
 
         //Drive to crater
         rotate(-45);

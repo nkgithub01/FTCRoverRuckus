@@ -46,6 +46,9 @@ public class test extends LinearOpMode{
         rightLin = hardwareMap.get(DcMotor.class, "rightLin");
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
 
+        //Initialize the Servos
+        //markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
+
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -64,16 +67,18 @@ public class test extends LinearOpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
-        //markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
+        //Set the direction of the servos
+        //markerDeployment.setDirection(Servo.Direction.FORWARD);
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
         waitForStart();
 
-        //markerDeployment.setPosition(1);
+        //markerDeployment.setPosition(0.5);
 
         extendLinearSlide(5);
+        pause(1000);
         extendLinearSlide(-5);
 
         runForward(10);

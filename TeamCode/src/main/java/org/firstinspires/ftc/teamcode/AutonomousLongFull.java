@@ -26,6 +26,7 @@ public class AutonomousLongFull extends LinearOpMode{
 
     //Intake
     Servo intake = null;
+    Servo markerDeployment = null;
 
     //Sensors
     ColorSensor color = null;
@@ -50,6 +51,7 @@ public class AutonomousLongFull extends LinearOpMode{
 
         //Initialize the servos
         intake = hardwareMap.get(Servo.class, "intake" );
+        markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
 
         //init sensors
         color = hardwareMap.get(ColorSensor.class, "color");
@@ -84,6 +86,7 @@ public class AutonomousLongFull extends LinearOpMode{
 
         //Set the direction of the servo
         intake.setDirection(Servo.Direction.FORWARD);
+        markerDeployment.setDirection(Servo.Direction.FORWARD);
 
         //Initialize servo to be not moving
         intake.setPosition(0.5);
@@ -128,6 +131,8 @@ public class AutonomousLongFull extends LinearOpMode{
         run(160);
 
         //Place team marker
+        rotate(180);
+        markerDeployment.setPosition(0.5);
 
         //Drive to crater
         rotate(180);
