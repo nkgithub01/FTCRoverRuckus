@@ -46,7 +46,7 @@ public class AutonomousLongWithLinearSlide extends LinearOpMode{
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
 
         //Initialize the Servos
-        markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
+        markerDeployment = hardwareMap.get(Servo.class, "mkDep");
 
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
