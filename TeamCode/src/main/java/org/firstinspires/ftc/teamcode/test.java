@@ -66,12 +66,15 @@ public class test extends LinearOpMode{
 
         waitForStart();
 
-        extendLinearSlide(1);
-        extendLinearSlide(-1);
+        extendLinearSlide(5);
+        extendLinearSlide(-5);
 
         runForward(10);
+        pause(1000);
         runBackward(10);
+        pause(1000);
         rotateRight(180);
+        pause(1000);
         rotateLeft(180);
 
 
@@ -115,6 +118,12 @@ public class test extends LinearOpMode{
         }*/
     }
 
+    public void pause(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception e) { }
+    }
+
     /**
      * Rotates right by a number of degrees, negative degrees will rotate left
      * @param degrees the number of degrees to rotate right
@@ -124,9 +133,7 @@ public class test extends LinearOpMode{
         leftFront.setPower(100);
         rightBack.setPower(-100);
         rightFront.setPower(-100);
-        try {
-            Thread.sleep((int) (timePerDegree * degrees));
-        } catch (Exception e) { }
+        pause((int) (timePerDegree * degrees));
         setPowerAllMotors(0);
     }
 
@@ -135,9 +142,7 @@ public class test extends LinearOpMode{
         leftFront.setPower(-100);
         rightBack.setPower(100);
         rightFront.setPower(100);
-        try {
-            Thread.sleep((int) (timePerDegree * degrees));
-        } catch (Exception e) { }
+        pause((int) (timePerDegree * degrees));
         setPowerAllMotors(0);
     }
 
@@ -147,17 +152,13 @@ public class test extends LinearOpMode{
      */
     public void runForward(double cm) {
         setPowerAllMotors(100);
-        try {
-            Thread.sleep((int) (timePerCm * cm));
-        } catch (Exception e) { }
+        pause((int) (timePerCm * cm));
         setPowerAllMotors(0);
     }
 
     public void runBackward(double cm) {
         setPowerAllMotors(-100);
-        try {
-            Thread.sleep((int) (timePerCm * cm));
-        } catch (Exception e) { }
+        pause((int) (timePerCm * cm));
         setPowerAllMotors(0);
     }
 
