@@ -24,6 +24,9 @@ public class test extends LinearOpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
+    //Servos
+    //Servo markerDeployment = null;
+
     //Constants
     double timePerCm = 70;
     double timePerDegree = 7;
@@ -61,10 +64,14 @@ public class test extends LinearOpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
+        //markerDeployment = hardwareMap.get(Servo.class, "markerDeployment");
+
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
         waitForStart();
+
+        //markerDeployment.setPosition(1);
 
         extendLinearSlide(5);
         extendLinearSlide(-5);
@@ -76,6 +83,7 @@ public class test extends LinearOpMode{
         rotateRight(180);
         pause(1000);
         rotateLeft(180);
+
 
 
         /*double lo = 0.0, hi = 10, mid;
