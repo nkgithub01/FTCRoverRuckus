@@ -23,6 +23,9 @@ public class DriveWithLinearSlide extends OpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
+    int originalLeftPosition;
+    int originalRightPosition;
+
     //Initialize the variables
     @Override
     public void init() {
@@ -52,6 +55,10 @@ public class DriveWithLinearSlide extends OpMode{
 
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
+
+        //Record initial linear slide positions
+        originalLeftPosition = leftLin.getCurrentPosition();
+        originalRightPosition = rightLin.getCurrentPosition();
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
@@ -90,10 +97,10 @@ public class DriveWithLinearSlide extends OpMode{
             rightLin.setPower(0);
         }
 
-        if (leftLin.getCurrentPosition() > 500 && leftLin.getPower() > 0) leftLin.setPower(0);
-        if (rightLin.getCurrentPosition() > 500 && rightLin.getPower() > 0) rightLin.setPower(0);
-        if (leftLin.getCurrentPosition() <= 0 && leftLin.getPower() < 0) leftLin.setPower(0);
-        if (rightLin.getCurrentPosition() <= 0 && rightLin.getPower() < 0) rightLin.setPower(0);
+        if (leftLin.getCurrentPosition() > originalLeftPosition + 500 && leftLin.getPower() > 0) leftLin.setPower(0);
+        if (rightLin.getCurrentPosition() > originalRightPosition + 500 && rightLin.getPower() > 0) rightLin.setPower(0);
+        if (leftLin.getCurrentPosition() <= originalLeftPosition && leftLin.getPower() < 0) leftLin.setPower(0);
+        if (rightLin.getCurrentPosition() <= originalRightPosition && rightLin.getPower() < 0) rightLin.setPower(0);
 
         //Displays the runtime
         telemetry.addData("Left joystick: ", gamepad1.left_stick_y);
