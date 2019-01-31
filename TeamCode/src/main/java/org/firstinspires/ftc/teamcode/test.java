@@ -25,7 +25,7 @@ public class test extends LinearOpMode{
     DcMotor leftLin = null;
 
     //Servos
-    Servo markerDeployment = null;
+    //Servo markerDeployment = null;
 
     //Constants
     double timePerCm = 70;
@@ -47,7 +47,7 @@ public class test extends LinearOpMode{
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
 
         //Initialize the Servos
-        markerDeployment = hardwareMap.get(Servo.class, "mkDep");
+        //markerDeployment = hardwareMap.get(Servo.class, "mkDep");
 
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -67,7 +67,7 @@ public class test extends LinearOpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
-        markerDeployment.setDirection(Servo.Direction.FORWARD);
+        //markerDeployment.setDirection(Servo.Direction.FORWARD);
 
         //Set the direction of the servos
         //markerDeployment.setDirection(Servo.Direction.FORWARD);
@@ -91,9 +91,9 @@ public class test extends LinearOpMode{
         pause(1000);
         rotateLeft(180);
 
-        markerDeployment.setPosition(0.2);
+        //markerDeployment.setPosition(0.2);
         pause(100);
-        markerDeployment.setPosition(0.9);
+        //markerDeployment.setPosition(0.9);
 
 
         /*double lo = 0.0, hi = 10, mid;
@@ -136,6 +136,10 @@ public class test extends LinearOpMode{
         }*/
     }
 
+    /**
+     * Pauses the program for some amount of milliseconds
+     * @param ms the number of milliseconds
+     */
     public void pause(long ms) {
         try {
             Thread.sleep(ms);
@@ -198,9 +202,9 @@ public class test extends LinearOpMode{
      */
     public void extendLinearSlide(double cm) {
         leftLin.setTargetPosition(leftLin.getCurrentPosition() + (int) (cm * ticksPerCm));
-        //rightLin.setTargetPosition(rightLin.getCurrentPosition() - (int) (cm * ticksPerCm));
+        rightLin.setTargetPosition(rightLin.getCurrentPosition() + (int) (cm * ticksPerCm));
         leftLin.setPower(100);
-        //rightLin.setPower(100);
+        rightLin.setPower(100);
     }
 
 }

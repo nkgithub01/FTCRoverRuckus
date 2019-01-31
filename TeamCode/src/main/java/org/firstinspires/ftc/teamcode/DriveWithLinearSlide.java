@@ -79,16 +79,20 @@ public class DriveWithLinearSlide extends OpMode{
 
         //Linear slide control
         if (gamepad1.left_bumper) {
-            leftLin.setPower(100);
+            if (leftLin.getCurrentPosition() < originalLeftPosition + 500) leftLin.setPower(100);
+            else leftLin.setPower(0);
         }
         if (gamepad1.right_bumper) {
-            rightLin.setPower(100);
+            if (rightLin.getCurrentPosition() < originalRightPosition + 500) rightLin.setPower(100);
+            else rightLin.setPower(0);
         }
         if (gamepad1.left_trigger > 0) {
-            leftLin.setPower(-100);
+            if (leftLin.getCurrentPosition() > originalLeftPosition) leftLin.setPower(-100);
+            else leftLin.setPower(0);
         }
         if (gamepad1.right_trigger > 0) {
-            rightLin.setPower(-100);
+            if (rightLin.getCurrentPosition() > originalRightPosition) rightLin.setPower(-100);
+            else rightLin.setPower(0);
         }
         if (!gamepad1.left_bumper && gamepad1.left_trigger <= 0) {
             leftLin.setPower(0);
@@ -97,12 +101,7 @@ public class DriveWithLinearSlide extends OpMode{
             rightLin.setPower(0);
         }
 
-        if (leftLin.getCurrentPosition() > originalLeftPosition + 500 && leftLin.getPower() > 0) leftLin.setPower(0);
-        if (rightLin.getCurrentPosition() > originalRightPosition + 500 && rightLin.getPower() > 0) rightLin.setPower(0);
-        if (leftLin.getCurrentPosition() <= originalLeftPosition && leftLin.getPower() < 0) leftLin.setPower(0);
-        if (rightLin.getCurrentPosition() <= originalRightPosition && rightLin.getPower() < 0) rightLin.setPower(0);
-
-        //Displays the runtime
+        //Displays the runtime and debug info
         telemetry.addData("Left joystick: ", gamepad1.left_stick_y);
         telemetry.addData("right joystick: ", gamepad1.right_stick_y);
         telemetry.addData("left bumper: ", gamepad1.left_bumper);
