@@ -19,6 +19,8 @@ public class DriveWithMarker extends OpMode{
         DcMotor rightFront = null;
 
         Servo markerDeployment = null;
+        boolean deployed = false;
+        boolean pressed = false;
 
     //Initialize the variables
         @Override
@@ -41,9 +43,12 @@ public class DriveWithMarker extends OpMode{
             rightBack.setDirection(DcMotor.Direction.REVERSE);
             rightFront.setDirection(DcMotor.Direction.REVERSE);
 
+            markerDeployment = hardwareMap.get(Servo.class, "mkDep");
+
+            markerDeployment.setPosition(0.9);
+
             //Tell user that initialization is complete
             telemetry.addData("Status", "Initialized");
-            markerDeployment = hardwareMap.get(Servo.class, "mkDep");
 
         }
 
@@ -60,14 +65,32 @@ public class DriveWithMarker extends OpMode{
             rightBack.setPower(gamepad1.right_stick_y);
             rightFront.setPower(gamepad1.right_stick_y);
 
+            if(pressed &! gamepad1.a){
+                pressed = false;
+            }
+            else if(!pressed) {
+                if (gamepad1.a) {
+                    if (!deployed) {
+                        markerDeployment.setPosition(0.35);
+                        deployed = true;
+                    } else {
+                        markerDeployment.setPosition(0.95);
+                        deployed = false;
+                    }
+                    pressed = true;
+                }
+            }
+/*
             if(gamepad1.a)
             {
                 markerDeployment.setPosition(markerDeployment.getPosition() - 0.1);
+                pause(10);
             }
             else if(gamepad1.b)
             {
                 markerDeployment.setPosition(markerDeployment.getPosition() + 0.1);
-            }
+                pause(10);
+            }*/
 
 
             //Displays the runtime
@@ -75,4 +98,10 @@ public class DriveWithMarker extends OpMode{
             telemetry.addData("deployerPos: ", markerDeployment.getPosition());
         }
 
+        public void pause(long ms) {
+            try {
+                Thread.sleep(ms);
+            } catch (Exception e) { }
+        }
     }
+
