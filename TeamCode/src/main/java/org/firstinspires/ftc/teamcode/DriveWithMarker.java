@@ -60,8 +60,19 @@ public class DriveWithMarker extends OpMode{
             rightBack.setPower(gamepad1.right_stick_y);
             rightFront.setPower(gamepad1.right_stick_y);
 
+            if(gamepad1.a)
+            {
+                markerDeployment.setPosition(markerDeployment.getPosition() - 0.1);
+            }
+            else if(gamepad1.b)
+            {
+                markerDeployment.setPosition(markerDeployment.getPosition() + 0.1);
+            }
+
+
             //Displays the runtime
             telemetry.addData("Runtime: ", getRuntime());
+            telemetry.addData("deployerPos: ", markerDeployment.getPosition());
         }
 
     }
