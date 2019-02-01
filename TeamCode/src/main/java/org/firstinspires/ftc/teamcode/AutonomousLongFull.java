@@ -132,7 +132,13 @@ public class AutonomousLongFull extends LinearOpMode{
 
         //Place team marker
         rotate(180);
-        markerDeployment.setPosition(0.5);
+        markerDeployment.setPosition(0.35);
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) { }
+        run(-10);
+        markerDeployment.setPosition(0.95);
+        run(10);
 
         //Drive to crater
         rotate(180);

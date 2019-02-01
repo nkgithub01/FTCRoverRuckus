@@ -133,7 +133,13 @@ public class AutonomousShortFull extends LinearOpMode{
         if (goldIndex == 0) rotate(-180);
         else if (goldIndex == 1) rotate(-225);
         else rotate(-135);
-        markerDeployment.setPosition(0.5);
+        markerDeployment.setPosition(0.35);
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) { }
+        run(-10);
+        markerDeployment.setPosition(0.95);
+        run(10);
 
         //Drive to crater
         rotate(-45);
