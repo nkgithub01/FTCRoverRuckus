@@ -79,9 +79,9 @@ public class test extends LinearOpMode{
 
         //markerDeployment.setPosition(0.5);
 
-        extendLinearSlide(5);
+        //extendLinearSlide(5);
         pause(1000);
-        extendLinearSlide(-5);
+        //extendLinearSlide(-5);
 
         runForward(10);
         pause(1000);

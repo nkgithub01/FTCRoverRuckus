@@ -102,19 +102,19 @@ public class DriveWithLinearSlide extends OpMode{
         }*/
 
         if (gamepad1.left_trigger > 0) {
-            if (leftLin.getCurrentPosition() < - 50) leftLin.setPower(100);
+            if (leftLin.getCurrentPosition() < 2000) leftLin.setPower(100);
             else leftLin.setPower(0);
         }
         if (gamepad1.right_trigger > 0) {
-            if (rightLin.getCurrentPosition() < - 50) rightLin.setPower(100);
+            if (rightLin.getCurrentPosition() < 2000) rightLin.setPower(100);
             else rightLin.setPower(0);
         }
         if (gamepad1.left_bumper) {
-            if (leftLin.getCurrentPosition() > - 3000) leftLin.setPower(-100);
+            if (leftLin.getCurrentPosition() > -650) leftLin.setPower(-100);
             else leftLin.setPower(0);
         }
         if (gamepad1.right_bumper) {
-            if (rightLin.getCurrentPosition() > - 3000) rightLin.setPower(-100);
+            if (rightLin.getCurrentPosition() > - 650) rightLin.setPower(-100);
             else rightLin.setPower(0);
         }
         if (!gamepad1.left_bumper && gamepad1.left_trigger <= 0) {
