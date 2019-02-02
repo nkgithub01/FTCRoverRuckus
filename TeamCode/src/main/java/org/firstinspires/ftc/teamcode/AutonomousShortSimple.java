@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousShortWithLinearSlide", group="OpMode")
-public class AutonomousShortWithLinearSlide extends LinearOpMode{
+@Autonomous(name="test", group="Autonomous")
+public class AutonomousShortSimple extends LinearOpMode{
 
     //Objects
     /*********************************************************************************/
@@ -24,14 +24,15 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
-    //Servos
+    //Servo
     Servo markerDeployment = null;
 
     //Constants
-    final double ticksPerCm = 1;
-    final double ticksPerDegree = 1;
+    double timePerCm = 15;
+    double timePerDegree = 6.1;
+    double ticksPerCm = 20;
 
-    //Running
+    //running
     /*********************************************************************************/
 
     //Initialize the variables
@@ -69,15 +70,6 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
         //Set the direction of the servo
         markerDeployment.setDirection(Servo.Direction.FORWARD);
 
-        //Set the modes of the motors
-        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftLin.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightLin.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
@@ -89,65 +81,67 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
         extendLinearSlide(-12);
 
         //Move to depot
-        run(140);
+        runForward(140);
 
         //Place team marker
-        rotate(180);
-        markerDeployment.setPosition(0.35);
+        rotateRight(180);
+        markerDeployment.setPosition(0.65);
         try {
             Thread.sleep(1000);
         } catch (Exception e) { }
-        run(-10);
         markerDeployment.setPosition(0.95);
-        run(10);
 
         //Drive to crater
-        rotate(-45);
-        run(240);
+        rotateLeft(45);
+        runForward(240);
     }
 
     /**
-     * Extends the linear slide a certain distance
-     * @param cm the distance to extend
+     * Pauses the program for some amount of milliseconds
+     * @param ms the number of milliseconds
      */
-    public void extendLinearSlide(double cm) {
-        leftLin.setTargetPosition(leftLin.getTargetPosition() + (int) (cm * ticksPerCm));
-        rightLin.setTargetPosition(rightLin.getTargetPosition() - (int) (cm * ticksPerCm));
-        leftLin.setPower(100);
-        rightLin.setPower(100);
+    public void pause(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception e) { }
     }
 
     /**
      * Rotates right by a number of degrees, negative degrees will rotate left
      * @param degrees the number of degrees to rotate right
      */
-    public void rotate(double degrees) {
-        int deg = (int) (degrees * ticksPerDegree);
-        leftBack.setTargetPosition(leftBack.getTargetPosition() + deg);
-        leftFront.setTargetPosition(leftBack.getTargetPosition() + deg);
-        rightBack.setTargetPosition(leftBack.getTargetPosition() + deg);
-        rightFront.setTargetPosition(leftBack.getTargetPosition() + deg);
-        setPowerAllMotors(100);
+    public void rotateRight(double degrees) {
+        leftBack.setPower(-100);
+        leftFront.setPower(-100);
+        rightBack.setPower(100);
+        rightFront.setPower(100);
+        pause((int) (timePerDegree * degrees));
+        setPowerAllMotors(0);
+    }
+
+    public void rotateLeft(double degrees) {
+        leftBack.setPower(100);
+        leftFront.setPower(100);
+        rightBack.setPower(-100);
+        rightFront.setPower(-100);
+        pause((int) (timePerDegree * degrees));
+        setPowerAllMotors(0);
     }
 
     /**
      * Go forward a number of centimeters
      * @param cm the distance to travel
      */
-    public void run(double cm) {
-        setAllMotors((int) (cm * ticksPerCm));
+    public void runForward(double cm) {
         setPowerAllMotors(100);
+        pause((int) (timePerCm * cm));
+        setPowerAllMotors(0);
     }
 
-    /**
-     * Set how much to go forward on all motors
-     * @param dist the amount of encoder ticks
-     */
-    public void setAllMotors(int dist) {
-        leftBack.setTargetPosition(leftBack.getTargetPosition() + dist);
-        rightBack.setTargetPosition(leftBack.getTargetPosition() - dist);
-        leftFront.setTargetPosition(leftBack.getTargetPosition() + dist);
-        rightFront.setTargetPosition(leftBack.getTargetPosition() - dist);
+    public void runBackward(double cm) {
+        setPowerAllMotors(-100);
+        pause((int) (timePerCm * cm));
+        setPowerAllMotors(0);
     }
 
     /**
@@ -160,6 +154,17 @@ public class AutonomousShortWithLinearSlide extends LinearOpMode{
         rightBack.setPower(power);
         leftFront.setPower(power);
         rightFront.setPower(power);
+    }
+
+    /**
+     * Extends the linear slide a certain distance
+     * @param cm the distance to extend
+     */
+    public void extendLinearSlide(double cm) {
+        leftLin.setTargetPosition(leftLin.getCurrentPosition() + (int) (cm * ticksPerCm));
+        rightLin.setTargetPosition(rightLin.getCurrentPosition() + (int) (cm * ticksPerCm));
+        leftLin.setPower(100);
+        rightLin.setPower(100);
     }
 
 }
