@@ -28,8 +28,8 @@ public class test extends LinearOpMode{
     //Servo markerDeployment = null;
 
     //Constants
-    double timePerCm = 70;
-    double timePerDegree = 7;
+    double timePerCm = 15;
+    double timePerDegree = 6.1;
     double ticksPerCm = 20;
 
     //running
@@ -82,14 +82,15 @@ public class test extends LinearOpMode{
         //extendLinearSlide(5);
         pause(1000);
         //extendLinearSlide(-5);
+        //runForward(100);
+        //pause(2000);
+        //runBackward(100);
+        //pause(2000);
 
-        runForward(10);
-        pause(1000);
-        runBackward(10);
-        pause(1000);
-        rotateRight(180);
-        pause(1000);
-        rotateLeft(180);
+        pause(2000);
+        rotateRight(360);
+        pause(2000);
+        //rotateLeft(90);
 
         //markerDeployment.setPosition(0.2);
         pause(100);
@@ -151,19 +152,19 @@ public class test extends LinearOpMode{
      * @param degrees the number of degrees to rotate right
      */
     public void rotateRight(double degrees) {
-        leftBack.setPower(100);
-        leftFront.setPower(100);
-        rightBack.setPower(-100);
-        rightFront.setPower(-100);
+        leftBack.setPower(-100);
+        leftFront.setPower(-100);
+        rightBack.setPower(100);
+        rightFront.setPower(100);
         pause((int) (timePerDegree * degrees));
         setPowerAllMotors(0);
     }
 
     public void rotateLeft(double degrees) {
-        leftBack.setPower(-100);
-        leftFront.setPower(-100);
-        rightBack.setPower(100);
-        rightFront.setPower(100);
+        leftBack.setPower(100);
+        leftFront.setPower(100);
+        rightBack.setPower(-100);
+        rightFront.setPower(-100);
         pause((int) (timePerDegree * degrees));
         setPowerAllMotors(0);
     }
