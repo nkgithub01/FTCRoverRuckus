@@ -77,53 +77,29 @@ public class DriveWithLinearSlide extends OpMode{
         rightBack.setPower(gamepad1.right_stick_y);
         rightFront.setPower(gamepad1.right_stick_y);
 
-        //Linear slide control
-     /*   if (gamepad1.left_trigger > 0) {
-            if (leftLin.getCurrentPosition() < originalLeftPosition - 50) leftLin.setPower(100);
-            else leftLin.setPower(0);
-        }
-        if (gamepad1.right_trigger > 0) {
-            if (rightLin.getCurrentPosition() < originalRightPosition - 50) rightLin.setPower(100);
-            else rightLin.setPower(0);
-        }
-        if (gamepad1.left_bumper) {
-            if (leftLin.getCurrentPosition() > originalLeftPosition - 3000) leftLin.setPower(-100);
-            else leftLin.setPower(0);
-        }
-        if (gamepad1.right_bumper) {
-            if (rightLin.getCurrentPosition() > originalRightPosition - 3000) rightLin.setPower(-100);
-            else rightLin.setPower(0);
-        }
-        if (!gamepad1.left_bumper && gamepad1.left_trigger <= 0) {
-            leftLin.setPower(0);
-        }
-        if (!gamepad1.right_bumper && gamepad1.right_trigger <= 0) {
-            rightLin.setPower(0);
-        }*/
-
         if (gamepad1.left_trigger > 0) {
-            if (leftLin.getCurrentPosition() < -16) {
+            if (leftLin.getCurrentPosition() < -30) {
                 leftLin.setPower(100);
             }
             else leftLin.setPower(0);
         }
         if (gamepad1.right_trigger > 0) {
-            //if (rightLin.getCurrentPosition() < 2000) {
+            if (rightLin.getCurrentPosition() < -30) {
                 rightLin.setPower(100);
-            //}
-            //else rightLin.setPower(0);
+            }
+            else rightLin.setPower(0);
         }
         if (gamepad1.left_bumper) {
-            if (leftLin.getCurrentPosition() > -4316) {
+            if (leftLin.getCurrentPosition() > -4100) {
                 leftLin.setPower(-100);
             }
             else leftLin.setPower(0);
         }
         if (gamepad1.right_bumper) {
-            //if (rightLin.getCurrentPosition() > - 650) {
+            if (rightLin.getCurrentPosition() > -4100) {
                 rightLin.setPower(-100);
-            //}
-            //else rightLin.setPower(0);
+            }
+            else rightLin.setPower(0);
         }
         if (!gamepad1.left_bumper && gamepad1.left_trigger <= 0) {
             leftLin.setPower(0);
