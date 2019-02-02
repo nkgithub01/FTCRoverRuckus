@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousShortSimple", group="Autonomous")
-public class AutonomousShortSimple extends LinearOpMode{
+@Autonomous(name="AutonomousLongSimple", group="Autonomous")
+public class AutonomousLongSimple extends LinearOpMode{
 
     //Objects
     /*********************************************************************************/
@@ -75,11 +75,17 @@ public class AutonomousShortSimple extends LinearOpMode{
 
         waitForStart();
 
-        //Move to depot
-        runForward(140);
-        pause(250);
+        //Move to silver/gold
+        runForward(80);
+
+        //Drive to depot
+        rotateLeft(90);
+        runForward(78);
+        rotateLeft(45);
+        runForward(170);
 
         //Place team marker
+        rotateLeft(135);
         markerDeployment.setPosition(0.65);
         pause(250);
         markerDeployment.setPosition(0.05);

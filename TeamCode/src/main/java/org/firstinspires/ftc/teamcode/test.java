@@ -29,7 +29,7 @@ public class test extends LinearOpMode{
 
     //Constants
     double timePerCm = 15;
-    double timePerDegree = 6.1;
+    double timePerDegree = 8.2625;
     double ticksPerCm = 20;
 
     //running
@@ -88,7 +88,7 @@ public class test extends LinearOpMode{
         //pause(2000);
 
         pause(2000);
-        rotateRight(360);
+        rotateRight(135);
         pause(2000);
         //rotateLeft(90);
 
