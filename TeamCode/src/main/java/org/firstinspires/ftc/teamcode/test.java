@@ -87,13 +87,13 @@ public class test extends LinearOpMode{
         //runBackward(100);
         //pause(2000);
 
-        pause(2000);
-        rotateRight(135);
-        pause(2000);
+        //pause(2000);
+        extendLinearSlide(1);
+        //pause(2000);
         //rotateLeft(90);
 
         //markerDeployment.setPosition(0.2);
-        pause(100);
+        //pause(100);
         //markerDeployment.setPosition(0.9);
 
 

@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousShortSimple", group="Autonomous")
-public class AutonomousShortSimple extends LinearOpMode{
+@Autonomous(name="AutonomousDepot", group="Autonomous")
+public class AutonomousDepot extends LinearOpMode{
 
     //Objects
     /*********************************************************************************/
@@ -73,42 +73,26 @@ public class AutonomousShortSimple extends LinearOpMode{
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
-        /*
-        //Hang
-        extendLinearSlide(-4);
-        */
-
         waitForStart();
 
-        /*
-        //Stop hanging
-        extendLinearSlide(6);
-        pause(250);
-        rotateLeft(15);
-        pause(250);
-        runForward(10);
-        pause(250);
-        rotateRight(15);
-        pause(250);
-        */
-
         //Move to depot
-        runForward(140);
+        runForward(130);
         pause(250);
 
         //Place team marker
         markerDeployment.setPosition(0.65);
         pause(250);
+        runBackward(20);
+        pause(250);
         markerDeployment.setPosition(0.05);
         pause(250);
 
         //Drive to crater
-        runBackward(60);
+        runBackward(75);
         pause(250);
-        rotateRight(100);
+        rotateLeft(65);
         pause(250);
-        runForward(230);
-        pause(250);
+        runForward(165);
     }
 
     /**

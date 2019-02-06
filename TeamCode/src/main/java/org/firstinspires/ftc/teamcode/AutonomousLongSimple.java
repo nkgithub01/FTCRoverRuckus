@@ -73,7 +73,24 @@ public class AutonomousLongSimple extends LinearOpMode{
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
+        /*
+        //Hang
+        extendLinearSlide(-4);
+        */
+
         waitForStart();
+
+        /*
+        //Stop hanging
+        extendLinearSlide(6);
+        pause(250);
+        rotateLeft(15);
+        pause(250);
+        runForward(10);
+        pause(250);
+        rotateRight(15);
+        pause(250);
+        */
 
         //Move to silver/gold
         runForward(80);

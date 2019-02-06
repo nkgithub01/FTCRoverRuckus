@@ -3,12 +3,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /*
     Created by me ON 10/23/18
  */
-@TeleOp(name="DriveWithLinearSlide", group="OpMode")
-public class DriveWithLinearSlide extends OpMode{
+@TeleOp(name="DriveWithClaw", group="OpMode")
+public class DriveWithClaw extends OpMode{
 
     /* objects*/
     /**********************************/
@@ -23,8 +24,12 @@ public class DriveWithLinearSlide extends OpMode{
     DcMotor rightLin = null;
     DcMotor leftLin = null;
 
-    int originalLeftPosition;
-    int originalRightPosition;
+    //Servo
+    Servo intake = null;
+
+    //Other variables
+    boolean deployed = false;
+    boolean pressed = false;
 
     //Initialize the variables
     @Override
@@ -37,6 +42,9 @@ public class DriveWithLinearSlide extends OpMode{
 
         rightLin = hardwareMap.get(DcMotor.class, "rightLin");
         leftLin = hardwareMap.get(DcMotor.class, "leftLin");
+
+        //Initialize the servo
+        intake = hardwareMap.get(Servo.class, "claw");
 
         //Set the zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -56,10 +64,6 @@ public class DriveWithLinearSlide extends OpMode{
         rightLin.setDirection(DcMotor.Direction.REVERSE);
         leftLin.setDirection(DcMotor.Direction.FORWARD);
 
-        //Record initial linear slide positions
-        originalLeftPosition = leftLin.getCurrentPosition();
-        originalRightPosition = rightLin.getCurrentPosition();
-
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
     }
@@ -72,10 +76,10 @@ public class DriveWithLinearSlide extends OpMode{
     @Override
     public void loop() {
         //Drive the robot
-        leftBack.setPower(gamepad1.left_stick_y);
-        leftFront.setPower(gamepad1.left_stick_y);
-        rightBack.setPower(gamepad1.right_stick_y);
-        rightFront.setPower(gamepad1.right_stick_y);
+        leftBack.setPower(gamepad2.left_stick_y);
+        leftFront.setPower(gamepad2.left_stick_y);
+        rightBack.setPower(gamepad2.right_stick_y);
+        rightFront.setPower(gamepad2.right_stick_y);
 
         if (gamepad1.left_trigger > 0) {
             if (leftLin.getCurrentPosition() < -30) {
@@ -106,6 +110,22 @@ public class DriveWithLinearSlide extends OpMode{
         }
         if (!gamepad1.right_bumper && gamepad1.right_trigger <= 0) {
             rightLin.setPower(0);
+        }
+
+        if(pressed &! gamepad1.a) {
+            pressed = false;
+        }
+        else if(!pressed) {
+            if (gamepad1.a) {
+                if (!deployed) {
+                    intake.setPosition(0.95);
+                    deployed = true;
+                } else {
+                    intake.setPosition(0.05);
+                    deployed = false;
+                }
+                pressed = true;
+            }
         }
 
         //Displays the runtime and debug info
