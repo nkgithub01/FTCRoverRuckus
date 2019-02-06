@@ -36,7 +36,7 @@ public class AutonomousDepot extends LinearOpMode{
     /*********************************************************************************/
 
     //Initialize the variables
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         //Initialize the DcMotors
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         leftFront = hardwareMap.get(DcMotor.class, "leftFront");
@@ -74,6 +74,8 @@ public class AutonomousDepot extends LinearOpMode{
         telemetry.addData("Status", "Initialized");
 
         waitForStart();
+
+
 
         //Move to depot
         runForward(130);
